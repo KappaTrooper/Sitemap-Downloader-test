@@ -1,6 +1,3 @@
-Certainly! Here's the full `README.md` content that you can copy and paste into your project:
-
-```markdown
 # Sitemap Downloader
 
 A Flask web application that allows users to download all pages listed in a sitemap as `index.html` files and package them into a ZIP file.
