@@ -32,8 +32,8 @@ def download():
         if response.status_code != 200:
             return f"Failed to fetch sitemap: {sitemap_url}. Status code: {response.status_code}"
 
-        # Parse the sitemap
-        soup = BeautifulSoup(response.content, 'xml')
+        # Parse the sitemap explicitly as XML
+        soup = BeautifulSoup(response.content, features='xml')
         urls = [loc.text for loc in soup.find_all('loc')]
 
         if not urls:
@@ -74,7 +74,8 @@ def download():
             os.rmdir(os.path.join(destination_folder, dir))
         os.rmdir(destination_folder)
 
-        return send_file(zip_io, as_attachment=True, attachment_filename=zip_filename)
+        # Use `download_name` instead of `attachment_filename`
+        return send_file(zip_io, as_attachment=True, download_name=zip_filename)
 
     except Exception as e:
         return f"Error: {str(e)}"
